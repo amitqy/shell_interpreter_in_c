@@ -13,7 +13,7 @@ I)	 HOW TO EXECUTE
 
 		1.  shell_amit.c - contains actual code. 
 		2.  All manual page files for user created commands like FIND.txt, CD.txt, EXIT.txt, PWD.txt, HISTORY.txt...
-		    are supposed to be in the directory where the actual final.c is in. If not it may result in errors.
+		    are supposed to be in the directory where the actual shell_amit.c is in. If not it may result in errors.
 
 
 II)	 REFERENCES
