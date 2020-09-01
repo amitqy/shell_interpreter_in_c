@@ -78,7 +78,7 @@ III) COMMANDS IMPLEMENTED
 
 	MAN 	
 		*  	Used to get manual pages and more information related to any implemented command
-		*   MAN only works if the present working directory is /advancedos where the actual MAN files are present.
+		*   MAN only works if the present working directory is /shell_in_c where the actual MAN files are present.
 			Returns an error if MAN is accessed from other directories.
 		*   $ MAN command_name
 
