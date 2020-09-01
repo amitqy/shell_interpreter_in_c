@@ -1,0 +1,31 @@
+THIS IS THE MANUAL PAGE FOR USER CREATED COMMAND "HISTORY"
+-------------------------------------------------------
+NOTE: when a command is given in <command> type them with out < >
+NOTE: Comments start with  /* end with */
+
+TO USE THIS COMMAND type
+		
+		$ HISTORY                 
+	
+		*	This will retrive the last 10 commands used and their time stamps.
+		
+		*	The default status and name for no commands executed are FAILED and (null)
+
+		*	The Current command entry in the history is pointed by -->
+
+HOW "HISTORY" WORKS INTERNALLY
+---------------------------
+
+	* 	This command is implemented as a structure named Hist
+		of type 
+			struct hist{
+    			char *hname;
+				char  hdt[50];
+				int hstat;
+			}histarr[11];
+													
+	* 	It stores the name of the command inside hname, its time and date inside hdt and its status in hstat.
+	
+	*   Time is retrived using time_t data structure which has all the fields like day, month, year, hours, minutes, seconds .....
+		When a command is recieved , immediately its time stamp is pushed along with its name to the hist structure. 
+ 

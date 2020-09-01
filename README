@@ -1,0 +1,193 @@
+														
+
+I)	 HOW TO EXECUTE 
+
+		*   Make sure that readline library is installed, if not install using command 
+				$ sudo apt-get install libreadline6 libreadline6-dev
+		*   Make sure that gcc compiler is also installed on the system, if not install using the command
+				$ sudo apt-get install gcc
+		*   It is recommended to use Ubuntu 16.04 LTS or higher version and is updated.
+                *   The command to run is gcc shell_amit.c -l readline
+
+	FILES NECESSARY FOR THE EXECUTION ARE:
+
+		1.  shell_amit.c - contains actual code. 
+		2.  All manual page files for user created commands like FIND.txt, CD.txt, EXIT.txt, PWD.txt, HISTORY.txt...
+		    are supposed to be in the directory where the actual final.c is in. If not it may result in errors.
+
+
+II)	 REFERENCES
+
+		1.	Basic usage of readline()
+			https://stackoverflow.com/questions/6727171/using-readline-for-completion
+
+		2.	Exec() family of functions
+			https://www.geeksforgeeks.org/exec-family-of-functions-in-c/
+
+		3.  About Directory entries and #include<dirent.h>
+			http://man7.org/linux/man-pages/man3/readdir.3.html
+
+		4.	string seperation based on delimiter. strsep() for parsing space and pipe operator.
+			https://stackoverflow.com/questions/21383082/parsing-a-string-in-c-with-strsep-alternative-methods
+
+		5.  Time and Date functions, asctime(tm),
+			https://www.tutorialspoint.com/c_standard_library/c_function_asctime.htm
+		
+		6.  dup() family
+			https://www.geeksforgeeks.org/dup-dup2-linux-system-call/
+
+		7.  Basic file handling in C
+			https://www.geeksforgeeks.org/basics-file-handling-c/
+		
+		8.  chdir() for chanding directories
+			https://www.geeksforgeeks.org/chdir-in-c-language-with-examples/
+		
+		9.  getcwd() for getting the current working directory
+			https://stackoverflow.com/questions/298510/how-to-get-the-current-directory-in-a-c-program
+	
+		10. Getting the current user name
+			https://stackoverflow.com/questions/24503466/how-do-i-get-the-user-name-of-the-current-user
+		
+		etc.. few other references include manual pages inside the ubuntu terminal itself, geeksforgeeks,..
+		
+		
+III) COMMANDS IMPLEMENTED
+	
+		* All commands other than shell built in commands are in CAPITAL LETTERS ONLY.
+		
+	HELP 
+		* 	This command is used to retrieve all the supported commands implemented.
+		*	$ HELP
+	
+	CD
+		*	Used to Change directory to the one given in the path. 
+		*   $ CD path
+	
+	HISTORY
+		*   This command retrieves the last 10 commands executed with their time stamps.
+		*   $ HISTORY
+
+	PWD 
+		*  	This command retrieves the current working directory.
+		*   $ PWD
+	
+	FIND
+		*	Used to retrive all the files and sub directories that partially match the search_key like grep.
+		*  	$ FIND search_key
+
+	MAN 	
+		*  	Used to get manual pages and more information related to any implemented command
+		*   MAN only works if the present working directory is /advancedos where the actual MAN files are present.
+			Returns an error if MAN is accessed from other directories.
+		*   $ MAN command_name
+
+	EXIT
+		* 	This command is used to EXIT the shell with a Shell Exiting message.
+		*   $ EXIT
+				
+
+IV)	 FUNCTIONS USED IN THE IMPLEMENTATION
+  
+	clear()
+		1.	This function calls printf("\033[H\033[J") internally.
+		2. 	\033 means ASCII Escape Character.
+	    3. 	[H implies "move the cursor to home position" which is top most row and left most column.
+	    4. 	[J implies "Erases from current cursor to the end of the screen".
+
+	<dirent.h>
+		1.  opendir(".") function is used to open the current directory.
+		2.  closedir(dx) function is used to close the directory pointed by dx.
+		3.  names of files and subdirectories are retrieved with help of "struct dirent", built in data strucutre.
+		4.  Used in implementing FIND command, to make it work like grep, used strncmp().
+	
+	getcwd(char * buf , size_t size)
+		1.  This is a system call which is used to get the current working directory.
+		2.  Used in implementing PWD command
+	
+	<string.h>
+		1. 	int strcmp(const char *s1, const char *s2 ) 
+				is used to compare two strings s1 and s2 exactly.
+		2. 	int strcmp(const char *s1, const char *s2, size_t n )
+				is used to compare part (n) of string with another string.
+		3.  Used in implementing FIND command, to make it work like grep, used strncmp().
+		4.  char *strsep(char **stringp, const char *delim) 
+				function gets the next token from string *stringp, where tokens are strings separated by characters from delim.
+		5.  Used in finding out if there is a space " " or a pipe operator ' | ' in the command given.
+		6.  int strlen(const char *str)
+				used to find the length of the string str.
+	
+	<readline/readline.h>
+		1.  readline() 
+			function is used to read an input stream from the console, until enter is pressed.
+
+	<time.h>
+		1.  struct tm, contains all the values related to date and time.
+		2.	asctime(tm), is used to retrieve the date and time in a string format like
+			for example Wed Sep  4 23:38:53 IST 2019.
+		3.  Used in implementing HISTORY command, to get the time stamp for the commands executed.
+
+	<stdio.h>
+		1.  All basic functions like printf(),scanf(),...
+		2.  fopen("filename",mode), function to open a file , with a specific mode of operation read/write/execute.
+		3.  fclose(fp), function to close a file, pointed by fp.
+		4.  Used in implementing MAN command, to print the information related to a specific command from a file.
+		
+	getenv(const char *name)
+		1.  This, is used to get the current username.
+		
+	sleep(x)
+		1.  This, function is mainly used to order a current thread to wait for 'x' amount of time.
+		2.  Time, in seconds, can be given as parameter to sleep. Ex: sleep(3) , waits for 3 seconds.
+
+	chdir(const char* path)
+		1.  Is used to change to a directory to the one specified in the path.
+		2.  Used in implementing CD command to change from one directory to another.
+
+	fork()
+		1. 	System call is used to create a child process.
+		2. 	Returns a value
+				Negative : Not successful 
+				Zero	 : Returns to child process
+				Positive : Returns to parent process
+	
+	exec() family 
+		1. 	Has the following variants execl,execlp,execle,execv,execvp,execvpe.
+		2.  Exec() replaces the current process image with the new process image.
+		4.	Used with the combination of fork().
+		4.  int execvp(const char *file, char *const argv[])
+				file points to the file name associated with the file being executed.
+				argv[] is an array of character pointers terminated by NULL.
+				
+	dup(),dup2()
+		1.	Both are used to create duplicate file descriptors.
+		2.  dup() uses lowest unused number for the  new file descriptor, while as dup2 () uses the one which is specified by the user.
+		3.	If successful, both old and new descriptors can be used one for another.
+		4.  since both the file descriptors refer to the same file, the status flags and the file offset are shared.
+		5.  int dup(int old_file_descriptor); 
+		6.  int dup2(int old_file_descriptor, int new_file_descriptor);
+
+
+V)	 OTHER DETAILS
+		 
+		*	These details are not necessary and are just left for future reference and readers interest.		
+		1. 	Another implementation for the input string parser is also attached with the file named PARSE.cpp.
+			This uses the concept of loops and dealing with individual characters inside the string instead of 
+			using string functions like strsep() etc.
+		2.	Although effort has been made to keep the code bug free. In case of any errors kindly re-execute the program.
+			Common erros that are possible include segmentation faults caused by pointers, Unexpected program termination,
+			displaying a result and waiting forever not returning to the shell, very rare cases of wrong status values inside
+			the history... etc.
+		3.  Few test directories and random files are created to check proper functioning of CD command.
+		4.  Random issues with pipeoperator not working or terminating the program.
+		5.  In case if exit, is not working please try ctrl+c or ctrl+z to force stop the program entirely.
+	
+	
+	
+
+	
+	
+
+	
+
+
+

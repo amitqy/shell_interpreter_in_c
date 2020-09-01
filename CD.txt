@@ -1,0 +1,42 @@
+THIS IS THE MANUAL PAGE FOR USER CREATED COMMAND "CD"
+-----------------------------------------------------
+
+NOTE: when a command is given in <command> type them with out < >
+NOTE: Comments start with  /* end with */
+	
+	TO USE THIS COMMAND: 
+
+	1. TYPE  <CD PATH> 
+		   THIS WILL CHANGE THE CURRENT DIRECTORY TO THE ONE GIVEN IN THE PATH
+	2. TYPE  <CD ..>
+		   THIS WILL CHANGE THE CURRENT DIRECTORY TO THE PREVIOUS DIRECTORY
+	3. TYPE  <CD />
+		   THIS WILL CHANGE THE CURERNT DIRECTORY TO THE ROOT
+
+USAGE OF CD IS ILLUSTRATED BELOW
+--------------------------------
+
+ 	1.	root$ CD /home/advancedos   			/* full path */
+    	root/home/advancedos$	
+	
+	2.	root/dir1/dir2/dir3$ CD ..				/* previous directory */
+		root/dir1/dir2$
+		
+	3.  root/dir_a/dir_b/dir_c$ CD / 			/* root directory */
+		root$
+
+	
+
+HOW CD WORKS INTERNALLY
+-----------------------
+	
+	CD IS IMPLEMENTED IN OUR C PROGRAM WITH THE HELP OF chdir() function
+	
+		chdir() is a system call of type
+		
+		int chdir(const char *path);
+		
+		/* here path name can be the DIRECTORY to which the user wants to use as his current directory */
+
+		/* upon success it returns 0 else -1 in case of error */
+

@@ -1,0 +1,15 @@
+THIS IS THE MANUAL PAGE FOR USER CREATED COMMAND "EXIT"
+-------------------------------------------------------
+
+NOTE: when a command is given in <command> type them with out < >
+NOTE: Comments start with  /* end with */
+	
+	TO USE THIS COMMAND: 
+	 
+	* Type EXIT then hit Enter key.
+	
+	* This will display a small message like "Exiting Shell", then exits out of the shell.
+	
+	* EXIT is implemented internally as exit(0) system call. Here it returns nothing.
+		
+

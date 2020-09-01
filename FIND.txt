@@ -1,0 +1,39 @@
+THIS IS THE MANUAL PAGE FOR USER CREATED COMMAND "FIND"
+-------------------------------------------------------
+NOTE: when a command is given in <command> type them with out < >
+NOTE: Comments start with  /* end with */
+
+TO USE THIS COMMAND type
+		
+		$ FIND <file_or_directory_name>                 
+
+* Like grep this command, upon successful execution , it also returns all the files or  
+  sub-directories that match the string given to search.
+ 
+* If none of the files or sub-directories match. It returns/prints nothing.
+
+
+USAGE OF "FIND" ILLUSTRATED BELOW
+---------------------------------
+
+* consider the following directory root/advacedos/$ has the following files: a.out, EXIT.txt,
+  FIND.txt, new3.c, new.c, README, CD.txt, final.c, new2.c, new4.c, PWD.txt, time
+
+* Now the command   "root/advancedos/$ FIND new"   gives the following result
+
+  new.c
+  new2.c
+  new3.c
+  new4.c
+  
+
+HOW "FIND" WORKS INTERNALLY
+---------------------------
+
+* FIND()  is implemented with the help of  "struct dirent" which is a directory data structure 
+  which holds all the attributes of its files and directories.
+
+* FIND() also uses strncmp(), which is used to match a part of string with another string, 
+  returns true if it matches partly, else it returns false.
+
+

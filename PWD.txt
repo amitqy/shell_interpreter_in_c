@@ -1,0 +1,25 @@
+THIS IS THE MANUAL PAGE FOR USER CREATED COMMAND "PWD"
+------------------------------------------------------
+
+NOTE: when a command is given in <command> type them with out < >
+NOTE: Comments start with  /* end with */
+	
+	TO USE THIS COMMAND: 
+	 
+	* Type PWD then hit Enter key.
+	
+		root/home/advancedos$  PWD                                           
+			
+		Current Working Directory is - root/home/advancedos				/* Result */
+
+	
+HOW PWD USER CREATED COMMAND WORKS INTERNALLY
+---------------------------------------------
+
+	* PWD internally calls getcwd() system call.
+	
+	* It is of type char *getcwd(char *buf, size_t size);
+	
+	* Here the current directory path is stored in "buf" which is a pointer to character 
+	  and "size" is used to store the length of the string which is pointed by buf.
+
