@@ -7,7 +7,8 @@ I)	 HOW TO EXECUTE
 		*   Make sure that gcc compiler is also installed on the system, if not install using the command
 				$ sudo apt-get install gcc
 		*   It is recommended to use Ubuntu 16.04 LTS or higher version and is updated.
-                *   The command to run is gcc shell_amit.c -l readline
+		*   Download all the files and keep them in a folder names as "shell_in_c"
+		*   The command to run is gcc shell_amit.c -l readline
 
 	FILES NECESSARY FOR THE EXECUTION ARE:
 
